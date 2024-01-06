@@ -1,5 +1,9 @@
 // Import the functions you need from the SDKs you need
+// import * as firebase from "firebase/app";
 import { initializeApp } from "firebase/app";
+import { getFirestore, serverTimestamp } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+
 import "firebase/storage";
 import "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -16,10 +20,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+// export const storage = getStorage(app);
+// const projectStorage = app.storage();
+// const projectFirestore = app.firestore();
+// const timestamp = app.firestore.FieldValue.serverTimestamp;
+
 const app = initializeApp(firebaseConfig);
-
-const projectStorage = app.storage();
-const projectFirestore = app.firestore();
-const timestamp = app.firestore.FieldValue.serverTimestamp;
-
+const projectStorage = getStorage(app);
+const projectFirestore = getFirestore(app);
+const timestamp = serverTimestamp(); // Use serverTimestamp directly
 export { projectStorage, projectFirestore, timestamp };
