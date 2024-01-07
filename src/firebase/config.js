@@ -29,4 +29,4 @@ const app = initializeApp(firebaseConfig);
 const projectStorage = getStorage(app);
 const projectFirestore = getFirestore(app);
 const timestamp = serverTimestamp(); // Use serverTimestamp directly
-export { projectStorage, projectFirestore, timestamp };
+export { projectStorage, projectFirestore, timestamp, app };

@@ -4,16 +4,19 @@ const useFirestore = (collection) => {
   const [docs, setDocs] = useState([]);
 
   useEffect(() => {
-    const unsub = projectFirestore
-      .collection(collection)
-      .orderBy("createdAt", "desc")
-      .onSnapshot((snap) => {
+    const colRef = collection(projectFirestore, "image");
+    const unsub = onSnapshot(colRef, {
+      next: (snap) => {
         let documents = [];
-        snap.forEach((doc) => {
-          documents.push({ ...doc.data(), id: doc.id });
-        });
+        setPosts(
+          snap.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        );
         setDocs(documents);
-      });
+      },
+    });
 
     return () => unsub();
   }, [collection]);
